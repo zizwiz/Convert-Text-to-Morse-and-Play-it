@@ -4,6 +4,7 @@ using System.Linq;
 using System.Media;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -17,7 +18,7 @@ namespace ConvertTextToMorse
         /// Dot = 1 unit
         /// Dash = 3 units
         ///
-        /// Between dots and dashes in letter = 1 unit
+        /// Between dots and dashes in char = 1 unit
         /// Between Chars = 3 units
         /// Between words = 7 units
         /// </summary>
@@ -134,9 +135,9 @@ namespace ConvertTextToMorse
 
             foreach (char morseLetter in morseCode)
             {
-                if (morseLetter == '.') { Console.Beep(3000, 100); Task.Delay(100).Wait(); } //Dot
-                else if (morseLetter == '-') { Console.Beep(3000, 300); Task.Delay(300).Wait(); } //Dash
-                else if (morseLetter == ' ') Task.Delay(100).Wait(); //Space no noise
+                if (morseLetter == '.') { Console.Beep(3000, 100); Thread.Sleep(500); } //Dot
+                else if (morseLetter == '-') { Console.Beep(3000, 300); Thread.Sleep(500); } //Dash
+                else if (morseLetter == ' ') { Thread.Sleep(500); } //Space no noise
                 else { Console.Beep(200, 400); Task.Delay(400).Wait(); } //Error
             }
         }
